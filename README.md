@@ -69,7 +69,7 @@ Five different numeric encodings are defined, for efficiently representing vario
 Some examples of the integer formats are listed here.
 
 |Value|Encoding|
-|-:|:---|
+|---:|:---|
 |   0|`8b`|
 | 100|`ef`|
 |-100|`27`|
@@ -97,7 +97,7 @@ A real number is terminated by one (or two) 0xF nibbles so that it is always pad
 Some examples of the real formats are listed here.
 
 |Value|Encoding|
-|-:|:---|
+|---:|:---|
 |–2.25|`1E` for the operator, followed by `E2` (-2) `A2` (.2) `5F` (5, end of number)| 
 |0.140541E–3|`1E` for the operator, followed by `0A` (0.) `140541` (140541) `C3` (E-3) `FF` (end of number)|
 
