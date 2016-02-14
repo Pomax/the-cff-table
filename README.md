@@ -5,7 +5,7 @@ OpenType supports embedding of CFF data blocks as defined in Adobe's Tech Note 5
 In addition to generic CFF, OpenType supports simplified CFF for font data that has been specifically intended to be used inside an OpenType wrapper. CFF data that is not intended to ever be used outside of OpenType context uses the four byte OpenType magic number instead of the four byte CFF Header. This simplification differs from the full CFF specification in the following way:
 
 |CFF structure|Role in CFF|Role in OpenType-specific CFF|
-|:-|:-|:-|
+|:---|:---|:---|
 |Initial four bytes|CFF header|OpenType magic number|
 |Name INDEX|Font names for all fonts in the CFF|*Not used*|
 |Top DICT INDEX|DICT information that applies to all fonts in the CFF|Offsets to the rest of the CFF data|
@@ -43,7 +43,7 @@ Data objects are specified by byte offsets that are relative to some reference p
 CFF uses five primary data formats, with Type2 Charstrings specifying an additional data format for operator and operand information. In addition to the established OpenType Data Types (**OpenType spec section reference here?**), the following additional types are used: 
 
 | Name | Range | Description|
-|:-|:-|:-|
+|:---|:---|:---|
 |Offset|variable|1, 2, 3, or 4 byte numeral representing a byte offset.|
 |Offsize|1-4|1 byte unsigned numeral that specifies the size of (local) Offset(s)|
 |DICT data|variable|semantic bytecode representing either DICT keys or numerals in several encodings|
@@ -57,7 +57,7 @@ DICT data encodes key-value pair represented in a compact tokenized format that 
 Five different numeric encodings are defined, for efficiently representing various number ranges as well as real (as opposed to intenger) numbers. The following table shows these encodings, using the convention that the first byte of the operand is b0, the second byte is b1, and so on. The table is ordered by the number of bytes that need to be read to decode the number:
 
 | Size | b0 range | value range | value calculation |
-|:-|:-|:-|:-|
+|:---|:---|:---|:---|
 |1| 32-246 | -107 to 107 | `b0 - 139` |
 |2| 247-250 | 108 to 1131 | `(b0-247) * 256 + b1 + 108` |
 |2| 251-254 | -1131 to -108 | `-(b0-251) * 256 - b1 - 108` |
@@ -69,7 +69,7 @@ Five different numeric encodings are defined, for efficiently representing vario
 Some examples of the integer formats are listed here.
 
 |Value|Encoding|
-|-:|:-|
+|-:|:---|
 |   0|`8b`|
 | 100|`ef`|
 |-100|`27`|
@@ -83,7 +83,7 @@ Some examples of the integer formats are listed here.
 The real (as opposed to integer) number operand begins with a byte value of 30 (`0x1E`) followed by a variable-length sequence of bytes. Each byte encodes two 4-bit nibbles, with the first nibble of a pair stored in the most significant 4 bits of a byte, and the second nibble of a pair stored in the least significant 4 bits of a byte. The interpretation of each nibble is as follows: 
 
 | Nibble | Represents |
-|:-|:-|
+|:---|:---|
 |0-9| digit 0-9 |
 |A| decimal point |
 |B| positive exponent |
@@ -97,7 +97,7 @@ A real number is terminated by one (or two) 0xF nibbles so that it is always pad
 Some examples of the real formats are listed here.
 
 |Value|Encoding|
-|-:|:-|
+|-:|:---|
 |–2.25|`1E` for the operator, followed by `E2` (-2) `A2` (.2) `5F` (5, end of number)| 
 |0.140541E–3|`1E` for the operator, followed by `0A` (0.) `140541` (140541) `C3` (E-3) `FF` (end of number)|
 
@@ -110,7 +110,7 @@ OT-CFF follows the same stack restrictions as the generic CFF specification, suc
 Operators may have one or more operands with an implicit format, formally declared in this specification for each operator. Possible operand interpretations are:
 
 |Type|Description|
-|:-|:-|
+|:---|:---|
 |number|Integer or real number|
 |boolean|Integer type with the values 0 (false) and 1 (true)|
 |array|A list of one or more numbers|
@@ -129,7 +129,7 @@ The list of DICT operators is as follows:
 Operators that may be used in an OT-CFF Top DICT are:
 
 |Operator byte code|Operator name|Description|Operand format|
-|:-|:-|:-|:-|
+|:---|:---|:---|:---|
 |10|StdHW|...|number|
 |11|StdVW|...|number|
 |12 12|StemSnapH|...|number|
@@ -155,7 +155,7 @@ The offset array specifies offsets within the object data. An object is retrieve
 The INDEX structure is as follows:
 
 |type|name|description|
-|:-|:-|:-|
+|:---|:---|:---|
 |USHORT|count|Number of objects stored in the INDEX's data region |
 |Offsize|offSize|The number of bytes used for offsets in the offset array.|
 |Offset[count+1]|offset|The array of offsets into the object data. Values start at 1 (see note below).|
@@ -172,7 +172,7 @@ Where the generic CFF specification requires the CFF block to start with a four 
 Note that if a simplified CFF block is interpreted as generic CFF (for instance, if something copies the block out without rewriting it to proper generic CFF format for embedding in PostScript or PDF documents), the OpenType magic number will be interpreted as a CFF Header structure, leading to the following invalid parse result:
 
 |Field|Value|
-|:-|:-|
+|:---|:---|
 |Major version|95|
 |Minor version|15|
 |Header structure size in bytes|60|
