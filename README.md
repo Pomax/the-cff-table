@@ -1,6 +1,6 @@
 # The CFF Table
 
-OpenType supports embedding of CFF data blocks as defined in Adobe's Tech Note 5176 ("The Compact Font Format Specification"). For more information on this specification, please consult this Tech Note.
+OpenType supports embedding of CFF data blocks as defined in [Adobe's Tech Note 5176 ("The Compact Font Format Specification")](https://partners.adobe.com/public/developer/en/font/5176.CFF.pdf). For more information on this specification, please consult this Tech Note.
 
 In addition to generic CFF, OpenType supports simplified CFF for font data that has been specifically intended to be used inside an OpenType wrapper. CFF data that is not intended to ever be used outside of OpenType context uses the four byte OpenType magic number instead of the four byte CFF Header. This simplification differs from the full CFF specification in the following way:
 
@@ -31,7 +31,7 @@ A CFF block intended purely for use inside an OpenType wrapped has the following
 | OpenType magic number | *Must* be the four bytes `0x5F 0x0F 0x3C 0xF5`. |
 | Top DICT INDEX | Encodes not-covered-by-OpenType metadata, and contains the offsets to the CharStrings and Local Subroutines structures. |
 | Global Subr INDEX | *May* be used, *must* be a single byte 0x00 if not used. |
-| CharStrings INDEX| Contains the glyph outlines for this font. *Must* use the Type2 CharString format. |
+| CharStrings INDEX| Contains the glyph outlines for this font. *Must* use the Type 2 CharString format. |
 | Local Subr INDEX | *May* be used, *must* be a single byte 0x00 if not used. |
 
 ## Data Types
@@ -40,7 +40,7 @@ Like all other OpenType data, OT-CFF data uses Motorola-style byte ordering (Big
 
 Data objects are specified by byte offsets that are relative to some reference point within the CFF data. These offsets are 1 to 4 bytes in length. This documentation uses the convention of enclosing the reference point in parentheses and uses a reference point of (0) to indicate an offset relative to the start of the CFF data and (self) to indicate an offset relative to the first byte of the data structure containing the offset.
 
-CFF uses five primary data formats, with Type2 Charstrings specifying an additional data format for operator and operand information. In addition to the established OpenType Data Types (**OpenType spec section reference here?**), the following additional types are used: 
+CFF uses five primary data formats, with Type 2 Charstrings specifying an additional data format for operator and operand information. In addition to the established OpenType Data Types (**OpenType spec section reference here?**), the following additional types are used: 
 
 | Name | Range | Description|
 |:---|:---|:---|
@@ -103,7 +103,7 @@ Some examples of the real formats are listed here.
 
 #### Representing operators in a DICT
 
-Operators and operands may be distinguished by inspection of their first byte: 0–21 specify operators and 28, 29, 30, and 32–254 specify operands (numbers). Byte values 22–27, 31, and 255 are reserved values in DICT structures (unlike in Type2 CharStrings).
+Operators and operands may be distinguished by inspection of their first byte: 0–21 specify operators and 28, 29, 30, and 32–254 specify operands (numbers). Byte values 22–27, 31, and 255 are reserved values in DICT structures (unlike in Type 2 CharStrings).
 
 OT-CFF follows the same stack restrictions as the generic CFF specification, such that an operator *may not* be preceded by more than 48 operands.
 
@@ -190,11 +190,11 @@ See the section on Data Types for which values may be encoded in the Top DICT's 
 
 ## The Global Subr INDEX
 
-This INDEX structure has an object data block that contains all (fragments of) Type2 CharStrings that may be used as subroutines ("Subr") by glyphs defined in the CharStrings INDEX object data block.
+This INDEX structure has an object data block that contains all (fragments of) Type 2 CharStrings that may be used as subroutines ("Subr") by glyphs defined in the CharStrings INDEX object data block.
 
 If no global subroutines are used, this table must be encoded as a single byte 0 (`0x00`).
 
-Sub routine numbers in Type2 CharStrings are skewed by a number called the "subr number bias", which is calculated from the subroutine count in either the local or global subr INDEX structures. This bias is calculated as follows:
+Sub routine numbers in Type 2 CharStrings are skewed by a number called the "subr number bias", which is calculated from the subroutine count in either the local or global subr INDEX structures. This bias is calculated as follows:
 
 ```
 USHORT bias;
@@ -216,17 +216,17 @@ This technique allows subroutine numbers to be specified using negative as well 
 
 This INDEX structure has an object data block that contains all glyph outlines available to the OpenType font that this CFF block is housed in.
 
-Glyph outlines *must* be defined using Type2 CharStrings, and are accessed by GID as defined in the OpenType `cmap` table(s).
+Glyph outlines *must* be defined using Type 2 CharStrings, and are accessed by GID as defined in the OpenType `cmap` table(s).
 
 The first CharString (GID 0) *must* be the `.notdef` glyph. The number of glyphs encoded in the CharString INDEX object data block *must* be in agreement with the `numGlyphs` field in the `maxp` table.
 
-### Type2 CharStrings
+### Type 2 CharStrings
 
-The official specification for Type Charstrings is Adobe's Tech Note 5177, "
+The official specification for Type 2 Charstrings is [Adobe's Tech Note 5177, "The Type 2 CharString format"](https://partners.adobe.com/public/developer/en/font/5177.Type 2.pdf). Please consult this Tech Note for information on how to encode/decode data in Type 2 CharString format.
 
 ## The local Subr INDEX
 
-This INDEX structure has an object data block that contains all (fragments of) Type2 CharStrings that may be used as local subroutines by glyphs defined in the CharStrings INDEX object data block.
+This INDEX structure has an object data block that contains all (fragments of) Type 2 CharStrings that may be used as local subroutines by glyphs defined in the CharStrings INDEX object data block.
 
 If no local subroutines are used, this table must be encoded as a single byte 0 (`0x00`).
 
