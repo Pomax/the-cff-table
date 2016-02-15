@@ -1,3 +1,5 @@
+***THIS TEXT IS A STUB, WRITTEN AS IF IT'S ALREADY REAL, BUT IT WANTS YOUR OPINIONS AND EDITS. IT IS IN NO WAY FINAL, BUT RATHER A FIRST DRAFT AT SOMETHING TO GET THE THINKY BITS OF OUR OPENTYPE BRAINS GOING. CFF IS FANTASTIC, AND THERE IS A LOT OF SIMPLIFICATION POSSIBLE FOR CFF THAT IS EXCLUSIVELY INTENDED FOR OPENTYPE WRAPPING. WHAT DOES A SIMPLIFICATION LIKE THAT LOOK LIKE?***
+
 # The CFF Table
 
 OpenType supports embedding of CFF data blocks as defined in [Adobe's Tech Note 5176 ("The Compact Font Format Specification")](https://partners.adobe.com/public/developer/en/font/5176.CFF.pdf). For more information on this specification, please consult this Tech Note.
