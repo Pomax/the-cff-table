@@ -2,7 +2,7 @@
 
 # The CFF Table
 
-OpenType supports embedding of CFF data blocks as defined in [Adobe's Tech Note 5176 ("The Compact Font Format Specification")](https://partners.adobe.com/public/developer/en/font/5176.CFF.pdf). For more information on this specification, please consult this Tech Note.
+OpenType supports embedding of CFF data blocks as defined in [Adobe's Tech Note 5176 ("The Compact Font Format Specification")](https://wwwimages2.adobe.com/content/dam/acom/en/devnet/font/pdfs/5176.CFF.pdf). For more information on this specification, please consult this Tech Note.
 
 In addition to generic CFF, OpenType supports simplified CFF for font data that has been specifically intended to be used inside an OpenType wrapper. CFF data that is not intended to ever be used outside of OpenType context uses the four byte OpenType magic number instead of the four byte CFF Header. This simplification differs from the full CFF specification in the following way:
 
